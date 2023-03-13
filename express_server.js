@@ -25,10 +25,14 @@ app.get("/hello", (req, res) => {
   res.send("<html><body>Hello <b>World</b></body></html>\n");
 }); 
 
-// res.render below to pass URL data from express_server to urls_index in views
+// res.render below to pass all URL data from express_server to urls_index in views:
 app.get("/urls", (req, res) => {
   const templateVars = { urls: urlDatabase };
   res.render("urls_index", templateVars);
 });
 
-//test
+// res.render below for new page to pass the single URL data from express_server to urls_show in views:
+app.get("/urls/:id", (req, res) => {
+  const templateVars = { id: req.params.id, longURL: /* What goes here? */ href="#"};
+  res.render("urls_show", templateVars);
+});
