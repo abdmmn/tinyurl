@@ -13,7 +13,17 @@ const urlDatabase = {
 
 
 // (6) WHERE DOES THIS GO?
-function generateRandomString() {}
+function generateRandomString() {
+  let result = '';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter <= 5) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+}
 
  
 
@@ -53,10 +63,31 @@ app.get("/urls/:id", (req, res) => {
 
 // (5) POST
 app.post("/urls", (req, res) => {
-  console.log(req.body); // Log the POST request body to the console
-  res.send("Ok"); // Respond with 'Ok' (we will replace this)
+  let longURL = req.body.longURL; // Log the POST request body to the console
+  let shortURL = generateRandomString();
+  urlDatabase[shortURL] = longURL
+  res.redirect("/urls")
 });
 
+
+
+//----------started below code fo r/u/:id but DIDNT WORK----------
+
+// --7-- below code to redirect /u/:id to longURL
+app.get("/u/:id", (req, res) => {
+  console.log(req.params)
+  const longURL = urlDatabase[req.params.id];
+  if (longURL){
+    res.redirect(longURL);
+  }
+  
+});
+
+
+
+
+
+// THIS ALWAYS GOES AT THE END BECAUSE THIS CODE STARTS THE APP
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
 });
