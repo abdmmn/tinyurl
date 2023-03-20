@@ -57,7 +57,8 @@ app.get("/urls/new", (req, res) => {
 
 // (2) res.render below for new page to pass the single URL data from express_server to urls_show in views:
 app.get("/urls/:id", (req, res) => {
-  const templateVars = { id: req.params.id, longURL: "facebook.com" /*href="#"*/};
+  // let longURL = req.body.longURL;
+  const templateVars = { id: req.params.id, longURL: urlDatabase[req.params.id] };
   res.render("urls_show", templateVars);
 });
 
@@ -91,7 +92,17 @@ app.post("/urls/:shortURL/delete", (req, res) => {
   }
 })
 
-
+//---9---Get a update request from url-show page to update existing longUrl in the index page
+app.post('/urls/:id', (req, res) => {
+  const shortURL = req.params.id;
+  console.log('req.body value', req.body.updatedURL)
+  // if (users[req.session.user_id] && (req.session.user_id === urlDatabase[shortURL].userID)) {
+  urlDatabase[shortURL] = req.body.updatedURL; 
+  res.redirect('/urls'); 
+  // } else {
+  //   res.status(401).send('Only authorized user allowed to edit')
+  // }
+});
 
 // THIS ALWAYS GOES AT THE END BECAUSE THIS CODE STARTS THE APP
 app.listen(PORT, () => {
