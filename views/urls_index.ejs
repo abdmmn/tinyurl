@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,6 +41,20 @@
               <td><%= urls[id] %></td>
             </tr>
           <% } %>
+         <td>
+          <form method="POST" action="/urls/9sm5xK/delete">...
+              <input type="submit" value="Delete" name="shortURL"
+                style=" color: red; background-color: white; border: 0.1em solid red; border-radius: 0.3em;">
+            </form>
+
+          </form>
+         </td>
+         <td>
+          <form method="POST" action="/urls/b2xVn2/delete">...
+            <input type="submit" value="Delete" name="shortURL"
+              style=" color: red; background-color: white; border: 0.1em solid red; border-radius: 0.3em;">
+          </form>
+         </td>
         </tbody>
       </table>
     </main>

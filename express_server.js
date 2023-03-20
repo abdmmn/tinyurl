@@ -57,7 +57,7 @@ app.get("/urls/new", (req, res) => {
 
 // (2) res.render below for new page to pass the single URL data from express_server to urls_show in views:
 app.get("/urls/:id", (req, res) => {
-  const templateVars = { id: req.params.id, longURL: /* What goes here? */ href="#"};
+  const templateVars = { id: req.params.id, longURL: "facebook.com" /*href="#"*/};
   res.render("urls_show", templateVars);
 });
 
@@ -70,9 +70,6 @@ app.post("/urls", (req, res) => {
 });
 
 
-
-//----------started below code fo r/u/:id but DIDNT WORK----------
-
 // --7-- below code to redirect /u/:id to longURL
 app.get("/u/:id", (req, res) => {
   console.log(req.params)
@@ -83,7 +80,16 @@ app.get("/u/:id", (req, res) => {
   
 });
 
-
+// ---8--- delete url
+app.post("/urls/:shortURL/delete", (req, res) => {
+  const shortURL = req.params.shortURL;
+  //  if (users[req.session.user_id] && (req.session.user_id === urlDatabase[shortURL].userID)) 
+   {delete urlDatabase[shortURL]
+    res.redirect('/urls');
+  // } else {
+  //   res.status(401).send('Only authorized user is allowed to delete')
+  }
+})
 
 
 
