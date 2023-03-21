@@ -4,13 +4,42 @@ const PORT = 8080; // default port 8080
 
 app.set("view engine", "ejs");
 
+
+
+//-------10-------- also see post request bottom of the page
+/*-----Database------------------------------------------------*/
+
 const urlDatabase = {
-  "b2xVn2": "http://www.lighthouselabs.ca",
-  "9sm5xK": "http://www.google.com"
+  "b2xVn2":
+    { longURL: "http://www.lighthouselabs.ca", userID: "userRandomID" },
+
+
+  "9sm5xK":
+    { longURL: "http://www.google.com", userID: "user2RandomID" }
 };
 
+const users = {
+  "userRandomID": {
+    id: "userRandomID",
+    email: "memon@gmail.com",
+    // password: bcrypt.hashSync("mermaid", 10)
+  },
 
+  "user2RandomID": {
+    id: "user2RandomID",
+    email: "seabird@gmail.com",
+    // password: bcrypt.hashSync("goldfish", 10)
+  }
+}
 
+function getUserByEmail(email, database) {
+
+  for (let id in database) {
+    if (database[id].email === email) {
+      return id;
+    }
+  } return false;
+}
 
 // (6) WHERE DOES THIS GO?
 function generateRandomString() {
@@ -103,6 +132,26 @@ app.post('/urls/:id', (req, res) => {
   //   res.status(401).send('Only authorized user allowed to edit')
   // }
 });
+
+//--------10------POST /login
+app.post('/login', (req, res) => {
+  // const user_id = getUserByEmail(req.body.email, users)
+  //   req.session.user_id = user_id;
+    
+  const username = req.body.username;
+
+  res.cookie('username', username)
+
+  res.redirect('/urls');
+
+  // }
+})
+
+
+
+
+
+
 
 // THIS ALWAYS GOES AT THE END BECAUSE THIS CODE STARTS THE APP
 app.listen(PORT, () => {

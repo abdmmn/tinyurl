@@ -1,0 +1,26 @@
+<% if(!user) { %>
+    
+      <a href="/register">
+        <button class="btn btn-success"
+          style=" color:black; border: 0.1em solid black; height: fit-content; margin-right: 0.3em;">Register</button>
+      </a>
+      <a href="/login">
+        <button class="btn btn-success"
+          style=" color:black; border: 0.1em solid black; height: fit-content;">Login</button>
+      </a>
+    
+      <% } else { %>
+
+        <form class="d-flex" action="/logout" method="POST">
+          <p>Welcome!:<%= user.email %></p>
+          <button type="submit" class="btn btn-success"
+            style=" color:black; border: 0.1em solid black; height: fit-content;">Logout</button>
+        </form>
+        <%  { %>
+
+
+
+
+
+
+          
